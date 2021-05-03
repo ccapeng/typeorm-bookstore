@@ -45,33 +45,8 @@ export const createBook = async (book: IBook) => {
 // GET
 export const getBook = async (bookId?: number) => {
   
-  // try {
-  //   if (bookId) {
-  //     return await Book.findOne({
-  //       where: { id: bookId },
-  //     });
-  //   } else {        // get all
-  //     return await Book.find();
-  //   }
-  // } catch (e) {
-  //   console.error(e);
-  // }
-
   try {
     if (bookId) {
-      // const book = await getRepository(Book)
-      //   .createQueryBuilder("book")
-      //   .leftJoinAndSelect("book.category", "category")
-      //   .leftJoinAndSelect("book.publisher", "publisher")
-      //   .leftJoinAndSelect("book.author", "author")
-      //   .where("book.id = :id", { id: bookId })
-      //   .getOne();
-      
-      // return book;
-      // return await Book.findOne({
-      //   where: { id: bookId },
-      // });
-
       let book = await Book.findOne({
         where: { id: bookId },
       });
@@ -98,7 +73,7 @@ export const updateBook = async (book: { id: number } & IBook) => {
   try {
     const _book = await Book.findOne({ where: { id: book['id'] } });
     if (!_book) {
-      return { message: "Book is not found." };
+      return { message: "Book not found." };
     }
 
     if (book['title']) {
@@ -117,7 +92,7 @@ export const deleteBook = async (bookId: number) => {
   try {
     const _book = await Book.findOne({ where: { id: bookId } });
     if (!_book) {
-      return { message: "Book is not found." };
+      return { message: "Book not found." };
     }
     return await _book.remove();
   } catch (e) {
