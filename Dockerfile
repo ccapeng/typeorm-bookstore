@@ -4,6 +4,7 @@ WORKDIR '/app'
 
 COPY package*.json ./
 RUN npm install --silent
+RUN npm run build
 COPY . .
 
 EXPOSE 8001
