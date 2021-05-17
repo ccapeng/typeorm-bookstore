@@ -4,6 +4,7 @@ WORKDIR '/app'
 
 COPY package*.json ./
 RUN npm install --silent
+RUN npm run prebuild
 RUN npm run build
 COPY . .
 
