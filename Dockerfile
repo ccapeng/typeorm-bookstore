@@ -2,11 +2,11 @@ FROM node:alpine
 
 WORKDIR '/app'
 
-COPY package*.json ./
+# COPY package*.json ./
+COPY . .
 RUN npm install --silent
 RUN npm run prebuild
 RUN npm run build
-COPY . .
 
 EXPOSE 8001
 
