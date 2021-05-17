@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+      
+  bookstore-node-typeorm:
+    image: bookstore-node-typeorm
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+      
