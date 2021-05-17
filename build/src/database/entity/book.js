@@ -1,0 +1,58 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Book = void 0;
+const typeorm_1 = require("typeorm");
+const category_1 = require("./category");
+const publisher_1 = require("./publisher");
+const author_1 = require("./author");
+let Book = class Book extends typeorm_1.BaseEntity {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn() //auto generated id
+    ,
+    __metadata("design:type", Number)
+], Book.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Book.prototype, "title", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", Number)
+], Book.prototype, "categoryId", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", Number)
+], Book.prototype, "publisherId", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", Number)
+], Book.prototype, "authorId", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => category_1.Category, category => category.books),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", category_1.Category)
+], Book.prototype, "category", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => publisher_1.Publisher, publisher => publisher.books),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", publisher_1.Publisher)
+], Book.prototype, "publisher", void 0);
+__decorate([
+    typeorm_1.ManyToOne(type => author_1.Author, author => author.books),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", author_1.Author)
+], Book.prototype, "author", void 0);
+Book = __decorate([
+    typeorm_1.Entity({ name: 'book' }) // table name in database
+], Book);
+exports.Book = Book;

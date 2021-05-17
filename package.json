@@ -12,7 +12,7 @@
     "build": "tsc",
     "tsoa:generate_": "nodemon -w src -w prisma -e ts _generate-tsoa.js",
     "tsoa:generate": "node _generate-tsoa.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 10000"
   },
   "_moduleAliases": {
     "@database": "./build/src/database/index.js",
@@ -30,10 +30,13 @@
     "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "child_process": "^1.0.2",
     "concurrently": "^6.0.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.24.0",
+    "mocha": "^8.3.2",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
