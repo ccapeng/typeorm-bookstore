@@ -22,7 +22,8 @@ export class CategoryController extends Controller {
   // GET ALL
   @Get('')
   public async getAll() {
-    return getCategory()
+    console.log("all cat");
+    return getCategory();
   }
 
   // CREATE
@@ -45,6 +46,7 @@ export class CategoryController extends Controller {
   //GET By ID
   @Get('/{categoryId}')
   public async getWithId(@Path('categoryId') categoryId: number) {
+    console.log("categoryId:", categoryId);
     let obj = await getCategory(categoryId);
     if (typeof(obj) === "undefined") {
       this.setStatus(404);
