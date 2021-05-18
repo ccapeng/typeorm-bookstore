@@ -16,11 +16,11 @@ const app: Express = express();
 app.set('json spaces', 4);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Handle logs in console during development
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-  app.use(cors());
+  app.use(morgan('dev'));  
 }
 
 // Handle security and origin in production
@@ -62,17 +62,6 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 app.use(function notFoundHandler(_req, res: express.Response) {
   return res.status(404).send({ message: "Not Found" });
-});
-
-// CORS
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  if (req.method === 'OPTIONS') {
-      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-      return res.status(200).json({});
-  }
-  next();
 });
 
 export default app;
