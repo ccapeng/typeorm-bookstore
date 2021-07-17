@@ -22,7 +22,15 @@ export class AuthorController extends Controller {
   // GET ALL
   @Get('')
   public async getAll() {
-    return getAuthor()
+    //return getAuthor()
+    let objs = await getAuthor();
+    if (Array.isArray(objs)) {
+      let total = objs.length;
+      // react-admin
+      this.setHeader('Access-Control-Expose-Headers', 'X-Total-Count')
+      this.setHeader('X-Total-Count', total+"")
+    }
+    return objs;
   }
 
   // CREATE

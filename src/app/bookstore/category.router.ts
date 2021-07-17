@@ -22,8 +22,15 @@ export class CategoryController extends Controller {
   // GET ALL
   @Get('')
   public async getAll() {
-    console.log("all cat");
-    return getCategory();
+    //return getCategory();
+    let objs = await getCategory();
+    if (Array.isArray(objs)) {
+      let total = objs.length;
+      // react-admin
+      this.setHeader('Access-Control-Expose-Headers', 'X-Total-Count')
+      this.setHeader('X-Total-Count', total+"")
+    }
+    return objs;
   }
 
   // CREATE
@@ -57,6 +64,7 @@ export class CategoryController extends Controller {
   // UPDATE
   @Put('/{categoryId}/')
   public async update(@Path('categoryId') categoryId: string, @Body() body: { name: string}) {
+    console.log("update:", categoryId, body);
     return updateCategory({ id: Number(categoryId), name: body.name });
   }
 

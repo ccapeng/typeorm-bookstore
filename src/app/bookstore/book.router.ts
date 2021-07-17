@@ -22,7 +22,15 @@ export class BookController extends Controller {
   // GET ALL
   @Get('')
   public async getAll() {
-    return getBook()
+    //return getBook();
+    let objs = await getBook();
+    if (Array.isArray(objs)) {
+      let total = objs.length;
+      // react-admin
+      this.setHeader('Access-Control-Expose-Headers', 'X-Total-Count')
+      this.setHeader('X-Total-Count', total+"")
+    }
+    return objs;
   }
 
   // CREATE
